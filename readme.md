@@ -1,5 +1,5 @@
 <div align="center">
-  <h1 align="center"><img class="center" src="./chrome/skin/default/jasminum/icon.png" alt="Icon" width=40px>  Jasminum - 茉莉花</h1>
+  <h1 align="center"><img class="center" src="./addon/chrome/skin/default/addontemplate/favicon.png" alt="Icon" width=40px>  Jasminum - 茉莉花</h1>
 </div>
 
 一个简单的 Zotero 中文插件（这个插件并不是 Zotero translator），实现的功能有：
@@ -64,7 +64,8 @@ Jasminum 插件中可以从[Translators_CN](https://github.com/l0o0/translators_
 
 ## 常见问题
 1. CAJ/PDF 文件识别失败
-一般按照默认设置是通过文件名来获取文献的标题与作者，在知网上按照标题与作者信息进行搜索。如果信息抓取失败，可以尝试将文件名的作者信息去掉，同时在设置中将文件名模板修改为`{%t}`，此时程序会将文件名识别为标题，并利用该标题在知网上进行模糊搜索，成功率比较高，不过可能会有多个结果
+🎈情况1: 一般按照默认设置是通过文件名来获取文献的标题与作者，在知网上按照标题与作者信息进行搜索。如果信息抓取失败，可以尝试将文件名的作者信息去掉,此时程序会将文件名识别为标题，并利用该标题在知网上进行模糊搜索，成功率比较高，不过可能会有多个结果。
+🎈情况2: 如果文件名中存在多个 **\_** 或有一些特殊的符号（如奇怪的标点符号等），把这些符号替换为空格。注意如果作者姓名前有 **\_**，请不要去除。
 
 2. 非官方翻译器页面空白
 刚点开该窗口时，页面信息为空白，需要手动点击下方的刷新按钮，拉取最新的翻译器信息
