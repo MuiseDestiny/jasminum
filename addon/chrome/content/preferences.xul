@@ -1,15 +1,176 @@
 <?xml version="1.0"?>
-<!DOCTYPE prefwindow SYSTEM "chrome://__addonRef__/locale/overlay.dtd">
+<?xml-stylesheet href="chrome://__addonRef__/skin/preferences.css" type="text/css"?>
+<!DOCTYPE window SYSTEM "chrome://__addonRef__/locale/overlay.dtd">
 
-<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
-<?xml-stylesheet href="chrome://zotero-platform/content/preferences.css"?>
+<overlay id="__addonRef__-preferences"
+    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+    xmlns:html="http://www.w3.org/1999/xhtml">
+    
+    <prefwindow id="zotero-prefs">
+        <prefpane id="zotero-prefpane-__addonRef__" insertafter="zotero-prefpane-advanced" label="&__addonRef__;" image="chrome://__addonRef__/skin/icon.png" onpaneload="initPref();">
+            <preferences id="zotero-preferences-__addonRef__">
+                <preference id="pref-__addonRef__.pdftkpath" name="extensions.zotero.__addonRef__.pdftkpath" type="string"/>
+                <preference id="pref-__addonRef__.autoupdate" name="extensions.zotero.__addonRef__.autoupdate" type="bool"/>
+                <preference id="pref-__addonRef__.namepatent" name="extensions.zotero.__addonRef__.namepatent" type="string"/>
+                <preference id="pref-__addonRef__.zhnamesplit" name="extensions.zotero.__addonRef__.zhnamesplit" type="bool"/>
+                <preference id="pref-__addonRef__.rename" name="extensions.zotero.__addonRef__.rename" type="bool"/>
+                <preference id="pref-__addonRef__.autobookmark" name="extensions.zotero.__addonRef__.autobookmark" type="bool"/>
+                <preference id="pref-__addonRef__.zhnamedot" name="extensions.zotero.__addonRef__.zhnamedot" type="bool"/>
+                <preference id="pref-__addonRef__.language" name="extensions.zotero.__addonRef__.language" type="string"/>
+                <preference id="pref-__addonRef__.autolanguage" name="extensions.zotero.__addonRef__.autolanguage" type="bool"/>
+                <preference id="pref-__addonRef__.ennamesplit" name="extensions.zotero.__addonRef__.ennamesplit" type="bool"/>''
+                <preference id="pref-__addonRef__.languagelist" name="extensions.zotero.__addonRef__.languagelist" type="string"/>
+                <preference id="pref-__addonRef__.attachment" name="extensions.zotero.__addonRef__.attachment" type="string"/>
+                <preference id="pref-__addonRef__.citefield" name="extensions.zotero.__addonRef__.citefield" type="string"/>
+                <preference id="pref-__addonRef__.dateformatter" name="extensions.zotero.__addonRef__.dateformatter" type="string"/>
+                <preference id="pref-__addonRef__.dateformatterfill" name="extensions.zotero.__addonRef__.dateformatterfill" type="bool"/>            
+            </preferences>
+            <tabbox>
+                <tabs>
+                    <tab label="&chinese;"/>
+                    <tab label="&translators;"/>
+                    <tab label="&about;"/>
+                </tabs>
 
-<prefwindow id="__addonRef__-prefs" title="&zotero.__addonRef__.pref.title;" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-  <script src="chrome://zotero/content/include.js" />
-  <prefpane id=" zotero-prefpane-__addonRef__" insertafter=" zotero-prefpane-advanced" label=" __addonName__" image=" chrome: __addonRef__ skin favicon.png" onpaneload=" Zotero.AddonTemplate.prefs.initPreferences(window)">
-    <preferences id=" zotero-preferences-__addonRef__">
-      <preference id=" pref-__addonRef__-enable" name=" extensions.zotero.__addonRef__.enable" type=" bool" />
-    </preferences>
-    <checkbox id=" zotero-prefpane-__addonRef__-enable" preference=" pref-__addonRef__-enable" label=" &zotero.__addonRef__.pref.enable.label;" />
-  </prefpane>
-</prefwindow>
+                <tabpanels id="zotero-prefpane-__addonRef__" orient="vertical" minheight="510">
+                    <tabpanel id="zotero-prefpane-chinese-tab">
+                        <vbox flex="1">
+                            <groupbox>
+                                <caption label="&chinese.caption;"/>
+                                <checkbox id="__addonRef__.autoupdate" label="&autoupdate.label;" preference="pref-__addonRef__.autoupdate"/>
+                                <checkbox id="__addonRef__.zhnamesplit" label="&zhnamesplit.label;" preference="pref-__addonRef__.zhnamesplit"/>
+                                <checkbox id="__addonRef__.rename" label="&rename.label;" preference="pref-__addonRef__.rename"/>
+                                <checkbox id="__addonRef__.autobookmark" label="&autobookmark.label;" preference="pref-__addonRef__.autobookmark"/>
+                                <row>
+                                    <checkbox id="__addonRef__.autolanguage" label="&autolanguage.label;" preference="pref-__addonRef__.autolanguage"/>
+                                    <label value="&language.label;" style="padding-top: 6px;"/>
+                                    <menulist flex="1" editable="true" id="__addonRef__.language" preference="pref-__addonRef__.language" maxwidth="100" >
+                                        <menupopup>
+                                            <menuitem label="zh-CN" value="zh-CN"/>
+                                            <menuitem label="zh" value="zh"/>
+                                        </menupopup>
+                                    </menulist>
+                                </row>
+                                <row>
+                                    <label value="&cnkicite.label;" style="padding-top: 6px;"/>
+                                    <menulist flex="0.5" editable="true" id="__addonRef__.citefield" preference="pref-__addonRef__.citefield">
+                                        <menupopup>
+                                            <menuitem label="extra"/>
+                                        </menupopup>
+                                    </menulist>
+                                </row>
+                            </groupbox>
+                            <groupbox>
+                                <caption label="&namepatent.caption;"/>
+                                <vbox flex="1">
+                                    <row>
+                                        <description>&namepatent.desc.info;</description>
+                                        <menulist flex="0.5" editable="true" id="__addonRef__.namepatent" preference="pref-__addonRef__.namepatent"> 
+                                            <menupopup>
+                                                <menuitem label="{%t}_{%g}" value="{%t}_{%g}" tooltiptext="&namepatent.desc.tg;"/>
+                                                <menuitem label="{%t}" value="{%t}" tooltiptext="&namepatent.desc.t;"/>
+                                            </menupopup>
+                                        </menulist>
+                                        <image src="chrome://__addonRef__/skin/information.png" tooltiptext="&namepatent.desc;"/>
+                                    </row>
+                                </vbox>
+                            </groupbox>
+                            <groupbox>
+                                <caption label="&attachment.caption;"/>
+                                <vbox flex="1">
+                                    <row> 
+                                        <description>&attachment.type.info;</description>
+                                        <menulist flex="0.5" id="__addonRef__.attachment" preference="pref-__addonRef__.attachment">
+                                            <menupopup>
+                                                <menuitem label="pdf" value="pdf"/>
+                                                <menuitem label="caj" value="caj"/>
+                                            </menupopup>
+                                        </menulist>
+                                    </row>
+                                    <hbox>
+                                        <description>&attachment.cookie.info;</description>
+                                        <button label="&open.cnki;" oncommand="openCNKI();"/>
+                                    </hbox>
+                                    <!-- <hbox>
+                                        <description>&cookie.endtime;</description>
+                                        <label id="cookie_endtime" value=""/>
+                                    </hbox> -->
+                                </vbox>
+                            </groupbox>
+                            <groupbox>
+                                <caption label="&toolbox.caption;"/>
+                                <vbox flex="1">
+                                    <checkbox id="__addonRef__.ennamesplit" label="&toolbox.ennamesplit.label;" preference="pref-__addonRef__.ennamesplit"/>
+                                    <row>
+                                        <description>&toolbox.bacthsetlanguage.info;</description>
+                                        <textbox id="__addonRef__.languagelist" preference="pref-__addonRef__.languagelist"/>
+                                        <image src="chrome://__addonRef__/skin/information.png" tooltiptext="&toolbox.bacthsetlanguage.desc;"/>
+                                    </row>
+                                    <row>
+                                        <description>&toolbox.dateformatter.info;</description>
+                                        <menulist flex="1" editable="false" id="__addonRef__.dateformatter" preference="pref-__addonRef__.dateformatter" maxwidth="110" >
+                                            <menupopup>
+                                                <menuitem label="ISO" value="ISO" tooltiptext="&toolbox.dateformatter.iso;"/>
+                                                <menuitem label="Short" value="short" tooltiptext="&toolbox.dateformatter.short;"/>
+                                                <menuitem label="Short Reverse" value="shortReverse" tooltiptext="&toolbox.dateformatter.shortreverse;"/>
+                                                <menuitem label="Year Only" value="yearOnly" tooltiptext="&toolbox.dateformatter.yearonly;"/>
+                                            </menupopup>
+                                        </menulist>
+                                        <checkbox id="__addonRef__.dateformatterfill" label="&toolbox.dateformatterfill;" preference="pref-__addonRef__.dateformatterfill"/>
+                                    </row>
+                                </vbox>
+                            </groupbox>
+                            <groupbox>
+                                <caption label="&pdftk.caption;"/>
+                                <description>&pdftk.info; <label class="zotero-text-link" value="PDFtk Server" href="https://www.pdflabs.com/tools/pdftk-server/"/></description>
+                                <hbox style="margin: 0" align="center">
+                                    <textbox id="__addonRef__-pdftk-path" preference="pref-__addonRef__.pdftkpath" readonly="true" flex="1"/>
+                                    <button label="&choose;" oncommand="choosePath();"/>
+                                    <image id="path-accept" src="chrome://__addonRef__/skin/accept.png" tooltiptext="&pdftk.path.check.ok;" hidden="true"/>
+                                    <image id="path-error" src="chrome://__addonRef__/skin/exclamation.png" tooltiptext="&pdftk.path.check.error;" hidden="true"/>
+                                </hbox>
+                            </groupbox>
+                        </vbox>
+                    </tabpanel>
+                    <tabpanel id="zotero-prefpane-translators-tab" orient="vertical">
+                        <description>&translator.notiice;</description>
+                        <listbox id="translators-listbox" flex="1">
+		                <listhead>
+		                	<listheader label="Translators"/>
+		                	<listheader label="Local"/>
+                            <listheader label="NewUpdate"/>
+                            <listheader label="Update"/>
+		                </listhead>
+		                <listcols>
+		                	<listcol flex="1"/>
+		                	<listcol width="200"/>
+                            <listcol width="200"/>
+                            <listcol width="100"/>
+		                </listcols>
+	                    </listbox>
+                        <hbox style="display: block">
+                            <button label="&refresh.label;" tooltiptext="&refreshInfo.label;" oncommand="initTranslatorPanel();"/>
+                            <button label="&updateall.label;" tooltiptext="&updateallInfo.label;" oncommand="updateAll();"/>
+                            <label value="&update.translator;"/>
+                            <label class="zotero-text-link" value="如何在浏览器中更新翻译器" href="https://www.bilibili.com/video/BV1F54y1k73n/"/>
+                        </hbox>
+                    </tabpanel>
+                    <tabpanel id="zotero-prefpane-translators-tab" orient="vertical">
+                        <description style="white-space: pre-wrap;">&about.desc;</description>
+                        <description style="white-space: pre-wrap;">&jasminun.tutorial;<label class="zotero-text-link" value="&han.tutorial;" href="https://www.zhihu.com/zvideo/1318136717396799488"/></description>
+                        <hbox>
+                            <label value="Jasminum 项目地址:"/><label class="zotero-text-link" value="https://github.com/l0o0/jasminum" href="https://github.com/l0o0/jasminum"/>
+                        </hbox>
+                        <hbox>
+                            <label value="Translators_CN 项目地址"/><label class="zotero-text-link" value="https://github.com/l0o0/translators_CN" href="https://github.com/l0o0/translators_CN"/>
+                        </hbox>
+                        <hbox>
+                            <label value="Zotero 常用插件国内下载"/><label class="zotero-text-link" value="https://zotero-chinese.gitee.io/zotero-plugins/#/" href="https://zotero-chinese.gitee.io/zotero-plugins/#/"/>
+                        </hbox>
+                    </tabpanel>
+                </tabpanels>
+            </tabbox>
+        </prefpane>
+        <script type="application/javascript" src="chrome://__addonRef__/content/scripts/preferences.js"/>
+    </prefwindow>
+</overlay>
